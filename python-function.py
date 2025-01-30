@@ -40,7 +40,33 @@ def add_list_item(html_file):
                     for item in items:
                         writer.writerow([item.text])
 
-            print("HTML list has been converted to CSV and saved in output.csv")           
+            print("HTML list has been converted to CSV and saved in output.csv")
+
+        elif new_item.lower() == 'check':
+            # Read the HTML file
+            with open('programs-to-make-work-easy\list for rob\list.html', 'r', encoding='utf-8') as file:
+                html_content = file.read()
+            soup = BeautifulSoup(html_content, 'html.parser')
+            items = soup.find_all('li')
+
+            # Clear spaces
+            checked_items = set()
+            for item in items:
+                checked_text = item.get_text(strip=True).replace(" ", "")
+                checked_items.add(checked_text)
+            # Create a new list
+            new_list = [soup.new_tag('li') for _ in checked_items]
+            for tag, text in zip(new_list, checked_items):
+                tag.string = text
+
+            # Replace old ones
+            ul_tag = soup.find('ul')
+            ul_tag.clear()
+            ul_tag.extend(new_list)
+
+            # Makes the new html list
+            with open('programs-to-make-work-easy/list for rob/list.html', 'w', encoding='utf-8') as file:
+                file.write(str(soup))
 
 
         else:
