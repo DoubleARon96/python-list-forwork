@@ -68,6 +68,7 @@ def add_list_item(html_file):
             with open('programs-to-make-work-easy/list for rob/list.html', 'w', encoding='utf-8') as file:
                 file.write(str(soup))
 
+            print("HTML list has been check for duplicates and all spaces deleted")
 
         else:
             print("Adding item to the list...")
