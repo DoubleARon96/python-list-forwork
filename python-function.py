@@ -55,7 +55,7 @@ def add_list_item(html_file):
                 checked_text = item.get_text(strip=True).replace(" ", "")
                 checked_items.add(checked_text)
             # Create a new list
-            new_list = [soup.new_tag('li') for _ in checked_items]
+            new_list = [soup.new_tag('li', attrs={'class': 'list-item'}) for _ in checked_items]
             for tag, text in zip(new_list, checked_items):
                 tag.string = text
 
